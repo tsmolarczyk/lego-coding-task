@@ -1,11 +1,18 @@
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import CombineLego from "./components/CombineLego";
+import WelcomePage from "./components/WelcomePage";
 
 function App() {
   return (
-    <>
-      <CombineLego />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/choose" element={<CombineLego />} />
+        {/* <CombineLego /> */}
+      </Routes>
+    </Router>
   );
 }
 
