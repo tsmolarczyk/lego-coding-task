@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const CombineLego = () => {
+const MinifigsPage = () => {
   const API_KEY = "key 75b805e57df61a1d8d61104835211b31";
   const HARRY_POTTER_THEME_ID = 246;
   const perPage = 100;
   const [minifigs, setMinifigs] = useState([]);
+  const navigate = useNavigate();
 
   const getCount = async () => {
     const response = await fetch(
@@ -53,6 +55,10 @@ const CombineLego = () => {
     });
   });
 
+  const handleButtonClick = () => {
+    navigate("/summary");
+  };
+
   useEffect(() => {
     getCount().then(count => {
       getRandomMinifigs(count).then(minifigs => {
@@ -69,8 +75,9 @@ const CombineLego = () => {
           <p>{minifig.name}</p>
         </div>
       ))}
+      <button onClick={handleButtonClick}>LET'S GO!</button>
     </div>
   );
 };
 
-export default CombineLego;
+export default MinifigsPage;
