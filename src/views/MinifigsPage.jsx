@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
+import MinifigCard from "../components/MinifigCard";
+import useActiveId from "../context/useActiveId";
 
 const MinifigsPage = () => {
   const API_KEY = "key 75b805e57df61a1d8d61104835211b31";
   const HARRY_POTTER_THEME_ID = 246;
   const perPage = 100;
-  const [minifigs, setMinifigs] = useState([]);
   const navigate = useNavigate();
+  const [minifigs, setMinifigs] = useState([]);
+  const { activeId, setActiveId } = useActiveId();
 
   const getCount = async () => {
     const response = await fetch(
@@ -30,7 +34,7 @@ const MinifigsPage = () => {
 
   const getRandomMinifigs = async count => {
     const randomMinifigs = [];
-    for (let i = 0; i < 3; i++) {
+    while (randomMinifigs.length < 3) {
       const randomPage = getRandomPageNumber(count);
       const response = await fetch(
         `https://rebrickable.com/api/v3/lego/minifigs/?in_theme_id=${HARRY_POTTER_THEME_ID}&page=${randomPage}&page_size=${perPage}`,
@@ -44,20 +48,27 @@ const MinifigsPage = () => {
       );
       const data = await response.json();
       const randomIndex = Math.floor(Math.random() * data.results.length);
-      randomMinifigs.push(data.results[randomIndex]);
+      const candidateMinifig = data.results[randomIndex];
+
+      if (candidateMinifig.set_img_url) {
+        randomMinifigs.push(candidateMinifig);
+      }
     }
     return randomMinifigs;
   };
 
-  getCount().then(count => {
-    getRandomMinifigs(count).then(minifigs => {
-      console.log(minifigs);
-    });
-  });
-
   const handleButtonClick = () => {
     navigate("/summary");
   };
+
+  const handleActive = id => {
+    console.log(id);
+    setActiveId(id);
+  };
+
+  useEffect(() => {
+    console.log("Updated activeId:", activeId);
+  }, [activeId]);
 
   useEffect(() => {
     getCount().then(count => {
@@ -67,15 +78,26 @@ const MinifigsPage = () => {
     });
   }, []);
 
+  console.log(activeId);
   return (
-    <div>
-      {minifigs.map(minifig => (
-        <div key={minifig.set_num}>
-          <img src={minifig.set_img_url} alt={minifig.name} />
-          <p>{minifig.name}</p>
-        </div>
-      ))}
-      <button onClick={handleButtonClick}>LET'S GO!</button>
+    <div className=" bg-black h-full w-full flex items-center justify-center flex-col">
+      <div className="flex justify-center items-center ">
+        {minifigs.map(minifig => (
+          <MinifigCard
+            key={minifig.set_num}
+            imgUrl={minifig.set_img_url}
+            alt={minifig.name}
+            name={minifig.name}
+            onClick={() => handleActive(minifig.set_num)}
+            isActive={activeId === minifig.set_num}
+          />
+        ))}
+      </div>
+      <Button
+        onClick={handleButtonClick}
+        title={"LETS GO!"}
+        isDisabled={activeId === null}
+      />
     </div>
   );
 };
