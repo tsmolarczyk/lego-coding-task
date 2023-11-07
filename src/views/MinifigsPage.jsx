@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import MinifigCard from "../components/MinifigCard";
-import useActiveId from "../context/useActiveId";
+import useChoosedMinifig from "../context/useChoosedMinifig";
 
 const MinifigsPage = () => {
   const API_KEY = "key 75b805e57df61a1d8d61104835211b31";
@@ -10,7 +10,16 @@ const MinifigsPage = () => {
   const perPage = 100;
   const navigate = useNavigate();
   const [minifigs, setMinifigs] = useState([]);
-  const { activeId, setActiveId } = useActiveId();
+  const { choosedMinifig, setChoosedMinifig } = useChoosedMinifig();
+
+  useEffect(() => {
+    setChoosedMinifig(null);
+    getCount().then(count => {
+      getRandomMinifigs(count).then(minifigs => {
+        setMinifigs(minifigs);
+      });
+    });
+  }, []);
 
   const getCount = async () => {
     const response = await fetch(
@@ -33,6 +42,8 @@ const MinifigsPage = () => {
   };
 
   const getRandomMinifigs = async count => {
+    localStorage.clear();
+
     const randomMinifigs = [];
     while (randomMinifigs.length < 3) {
       const randomPage = getRandomPageNumber(count);
@@ -61,24 +72,11 @@ const MinifigsPage = () => {
     navigate("/summary");
   };
 
-  const handleActive = id => {
-    console.log(id);
-    setActiveId(id);
+  const handleActive = minifig => {
+    console.log(minifig);
+    setChoosedMinifig(minifig);
   };
 
-  useEffect(() => {
-    console.log("Updated activeId:", activeId);
-  }, [activeId]);
-
-  useEffect(() => {
-    getCount().then(count => {
-      getRandomMinifigs(count).then(minifigs => {
-        setMinifigs(minifigs);
-      });
-    });
-  }, []);
-
-  console.log(activeId);
   return (
     <div className=" bg-black h-full w-full flex items-center justify-center flex-col">
       <div className="flex justify-center items-center ">
@@ -88,15 +86,15 @@ const MinifigsPage = () => {
             imgUrl={minifig.set_img_url}
             alt={minifig.name}
             name={minifig.name}
-            onClick={() => handleActive(minifig.set_num)}
-            isActive={activeId === minifig.set_num}
+            onClick={() => handleActive(minifig)}
+            isActive={choosedMinifig?.set_num === minifig.set_num}
           />
         ))}
       </div>
       <Button
         onClick={handleButtonClick}
         title={"LETS GO!"}
-        isDisabled={activeId === null}
+        isDisabled={!choosedMinifig?.set_num}
       />
     </div>
   );

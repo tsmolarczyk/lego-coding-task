@@ -1,37 +1,35 @@
 import React from "react";
+import useChoosedMinifig from "../context/useChoosedMinifig";
 
-const MinifigSummary = ({ minifig }) => {
+const MinifigSummary = ({ minifigParts }) => {
+  const { choosedMinifig } = useChoosedMinifig();
+
   return (
-    <div className="max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg">
-      <div className="px-6 py-4">
-        <h2 className="text-xl font-semibold text-gray-800">SUMMARY</h2>
-        <div className="flex justify-center mt-4">
-          <img
-            className="w-32 h-32"
-            src={minifig.imageUrl}
-            alt={minifig.name}
-          />
-        </div>
-        <h3 className="mt-2 text-lg text-center font-semibold text-gray-800">
-          {minifig.name}
-        </h3>
-        <p className="mt-1 text-center text-gray-600">
-          There are {minifig.parts.length} parts in this minifig:
-        </p>
-        <ul className="mt-4">
-          {minifig.parts.map(part => (
-            <li key={part.id} className="text-sm text-gray-700">
-              {part.name}{" "}
-              <span className="text-gray-500">({part.partNumber})</span>
-            </li>
-          ))}
-        </ul>
+    <div className="bg-blue-900 text-white text-center p-6 rounded-lg shadow-md max-w-sm mx-auto">
+      <h1 className="text-xl font-bold mb-4">SUMMARY</h1>
+      <img
+        src={choosedMinifig.set_img_url}
+        alt={choosedMinifig.name}
+        className="mx-auto"
+      />
+      <p className="font-semibold text-lg">{choosedMinifig.name}</p>
+      <p className="text-sm mb-4">{`There are ${choosedMinifig.num_parts} parts in this minifig:`}</p>
+      <div>
+        {minifigParts?.results.map((part, index) => (
+          <div key={index} className="mb-2">
+            <img
+              src={part.part.part_img_url}
+              alt={part.part.name}
+              className="w-20 h-20 mx-auto"
+            />
+            <p className="text-xs">{part.part.name}</p>
+            <p className="text-xs">{part.part.part_num}</p>
+          </div>
+        ))}
       </div>
-      <div className="flex justify-center pb-4">
-        <button className="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
-          SUBMIT
-        </button>
-      </div>
+      <button className="mt-4 bg-green-500 text-white font-bold py-2 px-4 rounded-full hover:bg-green-700">
+        SUBMIT
+      </button>
     </div>
   );
 };

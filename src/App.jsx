@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WelcomePage from "./views/WelcomePage";
 import SummaryPage from "./views/SummaryPage";
 import MinifigsPage from "./Views/MinifigsPage";
-import ActiveIdProvider from "./context/ActiveIdProvider";
+import ChoosedMinifigProvider from "./context/ChoosedMinifigProvider";
 
 function App() {
   return (
-    <ActiveIdProvider>
+    <ChoosedMinifigProvider>
       <Router>
         <Routes>
           <Route path="/" element={<WelcomePage />} />
@@ -16,7 +16,7 @@ function App() {
           <Route path="/summary" element={<SummaryPage />} />
         </Routes>
       </Router>
-    </ActiveIdProvider>
+    </ChoosedMinifigProvider>
   );
 }
 
