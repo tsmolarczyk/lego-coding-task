@@ -6,7 +6,7 @@ const MinifigSummary = ({ minifigParts }) => {
   const { choosedMinifig } = useChoosedMinifig();
   const { onSubmit, isValid } = useFormContext();
   return (
-    <div className="bg-white text-black  text-center flex-col flex justify-between p-6 my-6 mr-12 rounded-lg shadow-md max-w-screen-md mx-auto w-[350px] h-[710px]">
+    <div className="bg-white text-black  text-center flex-col flex justify-between p-6 my-6 mr-12 rounded-lg shadow-md max-w-screen-md mx-auto w-[350px] h-[60%]">
       <div className=" font-bold">
         <h1 className="text-2xl text-left mb-4 ">SUMMARY</h1>
         <div className="font-sans">

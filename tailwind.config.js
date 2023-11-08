@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        "lego-pattern": "url('./src/assets/bg.png')"
+        "lego-pattern": "url('/bg.png')"
       },
       backgroundSize: {
         auto: "auto",
