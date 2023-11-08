@@ -1,4 +1,12 @@
-const Button = ({ title, onClick, isDisabled }) => {
+import React from "react";
+
+type ButtonProps = {
+  title: string;
+  onClick: () => void;
+  isDisabled?: boolean;
+};
+
+const Button: React.FC<ButtonProps> = ({ title, onClick, isDisabled }) => {
   return (
     <button
       style={{

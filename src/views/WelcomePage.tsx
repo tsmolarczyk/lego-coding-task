@@ -1,7 +1,8 @@
+import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 
-const WelcomePage = () => {
+const WelcomePage: FC = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {

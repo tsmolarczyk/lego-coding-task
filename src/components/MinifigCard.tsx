@@ -1,4 +1,22 @@
-const MinifigCard = ({ imgUrl, alt, name, details, onClick, isActive }) => {
+import React from "react";
+
+interface MinifigCardProps {
+  imgUrl: string;
+  alt: string;
+  name: string;
+  details: string;
+  onClick: () => void;
+  isActive: boolean;
+}
+
+const MinifigCard: React.FC<MinifigCardProps> = ({
+  imgUrl,
+  alt,
+  name,
+  details,
+  onClick,
+  isActive
+}) => {
   const shadowStyle = isActive
     ? "0 0 15px 5px rgba(255, 165, 0, 1)"
     : "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";

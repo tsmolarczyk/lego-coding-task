@@ -1,8 +1,17 @@
-import { useState, useEffect } from "react";
-import ChoosedMinifigContext from "./ChoosedMinifigContext";
+import React, { useState, useEffect, FC } from "react";
+import ChoosedMinifigContext, {
+  ChoosedMinifigContextType,
+  Minifig
+} from "./ChoosedMinifigContext";
 
-const ChoosedMinifigProvider = ({ children }) => {
-  const [choosedMinifig, setChoosedMinifig] = useState(() => {
+interface ChoosedMinifigProviderProps {
+  children: React.ReactNode;
+}
+
+const ChoosedMinifigProvider: FC<ChoosedMinifigProviderProps> = ({
+  children
+}) => {
+  const [choosedMinifig, setChoosedMinifig] = useState<Minifig | null>(() => {
     const savedMinifig = localStorage.getItem("choosedMinifig");
     return savedMinifig ? JSON.parse(savedMinifig) : null;
   });
