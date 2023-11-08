@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 @font-face {
-  font-family: "BlackHanSans";
-  src: url("../src/assets/fonts/BlackHanSans-Regular.ttf") format("truetype");
+  font-family: 'BlackHanSans';
+  src: url('../src/assets/fonts/BlackHanSans-Regular.ttf') format('truetype');
 }
 
 *,
@@ -15,5 +15,5 @@
 }
 
 body {
-  font-family: "BlackHanSans", sans-serif;
+  font-family: 'BlackHanSans', sans-serif;
 }

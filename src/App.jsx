@@ -1,10 +1,9 @@
-import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-import WelcomePage from "./views/WelcomePage";
-import SummaryPage from "./views/SummaryPage";
-import MinifigsPage from "./views/MinifigsPage";
-import ChoosedMinifigProvider from "./context/ChoosedMinifigProvider";
+import WelcomePage from './views/WelcomePage'
+import SummaryPage from './views/SummaryPage'
+import MinifigsPage from './views/MinifigsPage'
+import ChoosedMinifigProvider from './context/ChoosedMinifigProvider'
 
 function App() {
   return (
@@ -17,7 +16,7 @@ function App() {
         </Routes>
       </Router>
     </ChoosedMinifigProvider>
-  );
+  )
 }
 
-export default App;
+export default App

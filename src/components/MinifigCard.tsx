@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react'
 
 interface MinifigCardProps {
-  imgUrl: string;
-  alt: string;
-  name: string;
-  details: string;
-  onClick: () => void;
-  isActive: boolean;
+  imgUrl: string
+  alt: string
+  name: string
+  details: string
+  onClick: () => void
+  isActive: boolean
 }
 
 const MinifigCard: React.FC<MinifigCardProps> = ({
@@ -15,11 +15,11 @@ const MinifigCard: React.FC<MinifigCardProps> = ({
   name,
   details,
   onClick,
-  isActive
+  isActive,
 }) => {
   const shadowStyle = isActive
-    ? "0 0 15px 5px rgba(255, 165, 0, 1)"
-    : "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)";
+    ? '0 0 15px 5px rgba(255, 165, 0, 1)'
+    : '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
 
   return (
     <div
@@ -38,13 +38,13 @@ const MinifigCard: React.FC<MinifigCardProps> = ({
       <p
         className="font-sans font-bold text-orange-400 hover:text-orange-600 z-10"
         onClick={() => {
-          window.open(details, "_blank");
+          window.open(details, '_blank')
         }}
       >
         Show Details
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default MinifigCard;
+export default MinifigCard

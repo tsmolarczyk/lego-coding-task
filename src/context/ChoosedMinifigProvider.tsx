@@ -1,28 +1,25 @@
-import React, { useState, useEffect, FC } from "react";
-import ChoosedMinifigContext, {
-  ChoosedMinifigContextType,
-  Minifig
-} from "./ChoosedMinifigContext";
+import React, { useState, useEffect, FC } from 'react'
+import ChoosedMinifigContext, { Minifig } from './ChoosedMinifigContext'
 
 interface ChoosedMinifigProviderProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const ChoosedMinifigProvider: FC<ChoosedMinifigProviderProps> = ({
-  children
+  children,
 }) => {
   const [choosedMinifig, setChoosedMinifig] = useState<Minifig | null>(() => {
-    const savedMinifig = localStorage.getItem("choosedMinifig");
-    return savedMinifig ? JSON.parse(savedMinifig) : null;
-  });
+    const savedMinifig = localStorage.getItem('choosedMinifig')
+    return savedMinifig ? JSON.parse(savedMinifig) : null
+  })
 
   useEffect(() => {
     if (choosedMinifig === null) {
-      localStorage.removeItem("choosedMinifig");
+      localStorage.removeItem('choosedMinifig')
     } else {
-      localStorage.setItem("choosedMinifig", JSON.stringify(choosedMinifig));
+      localStorage.setItem('choosedMinifig', JSON.stringify(choosedMinifig))
     }
-  }, [choosedMinifig]);
+  }, [choosedMinifig])
 
   return (
     <ChoosedMinifigContext.Provider
@@ -30,7 +27,7 @@ const ChoosedMinifigProvider: FC<ChoosedMinifigProviderProps> = ({
     >
       {children}
     </ChoosedMinifigContext.Provider>
-  );
-};
+  )
+}
 
-export default ChoosedMinifigProvider;
+export default ChoosedMinifigProvider

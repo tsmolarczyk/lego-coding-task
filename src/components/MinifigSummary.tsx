@@ -1,28 +1,29 @@
-import React from "react";
-import useChoosedMinifig from "../context/useChoosedMinifig";
-import Button from "./Button";
-import { useFormContext } from "../context/FormContext";
+import React from 'react'
+
+import useChoosedMinifig from '../context/useChoosedMinifig'
+import { useFormContext } from '../context/FormContext'
+import Button from './Button'
 
 interface Part {
   part: {
-    part_img_url: string;
-    name: string;
-    part_num: string;
-  };
+    part_img_url: string
+    name: string
+    part_num: string
+  }
 }
 
 interface MinifigSummaryProps {
   minifigParts: {
-    results: Part[];
-  };
+    results: Part[]
+  }
 }
 
 const MinifigSummary: React.FC<MinifigSummaryProps> = ({ minifigParts }) => {
-  const { choosedMinifig } = useChoosedMinifig();
-  const { onSubmit, isValid } = useFormContext();
+  const { choosedMinifig } = useChoosedMinifig()
+  const { onSubmit, isValid } = useFormContext()
 
   if (!choosedMinifig) {
-    return <div>Choose your Lego Figure</div>;
+    return <div>Choose your Lego Figure</div>
   }
 
   return (
@@ -58,13 +59,13 @@ const MinifigSummary: React.FC<MinifigSummaryProps> = ({ minifigParts }) => {
       </div>
       <div className="pb-6">
         <Button
-          title={"SUBMIT"}
+          title={'SUBMIT'}
           onClick={() => onSubmit()}
           isDisabled={!isValid}
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MinifigSummary;
+export default MinifigSummary
