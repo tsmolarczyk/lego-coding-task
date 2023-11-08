@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import MinifigCard from "../components/MinifigCard";
 import useChoosedMinifig from "../context/useChoosedMinifig";
+import Lottie from "lottie-react";
+import legoAnimation from "../assets/lottie-lego.json";
 
 const MinifigsPage = () => {
   const API_KEY = "key 75b805e57df61a1d8d61104835211b31";
@@ -10,20 +12,23 @@ const MinifigsPage = () => {
   const perPage = 100;
   const navigate = useNavigate();
   const [minifigs, setMinifigs] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { choosedMinifig, setChoosedMinifig } = useChoosedMinifig();
 
   useEffect(() => {
+    setLoading(true);
     setChoosedMinifig(null);
     getCount().then(count => {
       getRandomMinifigs(count).then(minifigs => {
         setMinifigs(minifigs);
+        setLoading(false);
       });
     });
   }, []);
 
   const getCount = async () => {
     const response = await fetch(
-      `https://rebrickable.com/api/v3/lego/minifigs/?in_theme_id=${HARRY_POTTER_THEME_ID}&page_size=1`,
+      `https://rebrickable.com/api/v3/lego/minifigs/?in_theme_id=${HARRY_POTTER_THEME_ID}`,
       {
         method: "GET",
         headers: {
@@ -73,19 +78,29 @@ const MinifigsPage = () => {
   };
 
   const handleActive = minifig => {
-    console.log(minifig);
     setChoosedMinifig(minifig);
   };
-
+  if (loading) {
+    return (
+      <div className="flex flex-wrap justify-center gap-4 p-4 bg-lego-pattern bg-cover min-h-screen">
+        <Lottie
+          animationData={legoAnimation}
+          style={{ width: "80vw", height: "80vh" }}
+        />
+      </div>
+    );
+  }
+  console.log(minifigs);
   return (
-    <div className=" bg-black h-full w-full flex items-center justify-center flex-col">
-      <div className="flex justify-center items-center ">
+    <div className="flex flex-wrap flex-col justify-center gap-4 p-4 bg-lego-pattern bg-cover min-h-screen">
+      <div className="flex justify-center items-center flex-col lg:flex-row ">
         {minifigs.map(minifig => (
           <MinifigCard
             key={minifig.set_num}
             imgUrl={minifig.set_img_url}
             alt={minifig.name}
             name={minifig.name}
+            details={minifig.set_url}
             onClick={() => handleActive(minifig)}
             isActive={choosedMinifig?.set_num === minifig.set_num}
           />
@@ -93,7 +108,7 @@ const MinifigsPage = () => {
       </div>
       <Button
         onClick={handleButtonClick}
-        title={"LETS GO!"}
+        title={"PROCEED TO SHIPMENT"}
         isDisabled={!choosedMinifig?.set_num}
       />
     </div>

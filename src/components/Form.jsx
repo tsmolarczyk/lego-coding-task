@@ -1,6 +1,9 @@
+import { useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useFormContext } from "../context/FormContext";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -10,7 +13,19 @@ const schema = yup.object().shape({
     .matches(/^\+?\d+$/, "Phone number is invalid")
     .required("Phone number is required"),
   email: yup.string().email("Email is invalid").required("Email is required"),
-  dateOfBirth: yup.date().typeError("Date of birth is required"),
+  dateOfBirth: yup
+    .date()
+    .nullable()
+    .transform((value, originalValue) =>
+      originalValue === "" ? null : yup.date().cast(value)
+    )
+    .max(
+      new Date(new Date().setFullYear(new Date().getFullYear() - 1)),
+      "Person must be at least under one year old"
+    )
+    .required("Date of birth is required")
+    .typeError("Date of birth is invalid"),
+
   address: yup.string().required("Address is required"),
   city: yup.string().required("City is required"),
   state: yup.string().required("State is required"),
@@ -21,20 +36,51 @@ const schema = yup.object().shape({
 });
 
 const Form = () => {
+  const { setOnSubmit } = useFormContext();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm({
+    mode: "all",
     resolver: yupResolver(schema)
   });
 
-  const onSubmit = data => {
-    console.log(data);
-  };
+  const onSubmit = useCallback(
+    async data => {
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          }
+        );
+
+        if (!response.ok) throw new Error("Network response was not ok.");
+
+        navigate("/");
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
+    },
+    [navigate]
+  );
+
+  useEffect(() => {
+    setOnSubmit(() => handleSubmit(onSubmit));
+  }, [setOnSubmit, handleSubmit, onSubmit, isValid]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 p-20">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="font-sans space-y-4 p-20"
+    >
       <div className="flex space-x-4">
         <div className="flex-1">
           <label
@@ -175,14 +221,6 @@ const Form = () => {
           <p className="text-red-500 text-xs mt-1">{errors.zipCode?.message}</p>
         </div>
       </div>
-
-      <button
-        type="submit"
-        className="px-4 py-2 bg-blue-500 text-white rounded shadow hover:bg-blue-600 disabled:bg-blue-300"
-        disabled={Object.keys(errors).length > 0}
-      >
-        Submit
-      </button>
     </form>
   );
 };

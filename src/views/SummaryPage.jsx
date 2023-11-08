@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Form from "../components/Form";
 import useChoosedMinifig from "../context/useChoosedMinifig";
 import MinifigSummary from "../components/MinifigSummary";
+import { FormProvider } from "../context/FormContext";
+
 const API_KEY = "key 75b805e57df61a1d8d61104835211b31";
 
 const SummaryPage = () => {
@@ -12,10 +14,9 @@ const SummaryPage = () => {
     if (choosedMinifig?.set_num) {
       getParts().then(parts => {
         setMinifigParts(parts);
-        console.log(parts);
       });
     }
-  }, []);
+  }, [choosedMinifig]);
 
   const getParts = async () => {
     const response = await fetch(
@@ -31,14 +32,18 @@ const SummaryPage = () => {
     const data = await response.json();
     return data;
   };
-  console.log(minifigParts?.results);
+
   return (
-    <div className="flex bg-lego-pattern bg-cover h-screen w-full">
-      <div className="w-2/3">
-        <Form />
+    <FormProvider>
+      <div className="flex flex-col md:flex-row bg-lego-pattern bg-cover min-h-screen w-full">
+        <div className="md:flex-grow">
+          <Form />
+        </div>
+        <div className="md:flex-none md:w-1/3 xl:w-1/4 p-4 mx-auto mr-12">
+          <MinifigSummary minifigParts={minifigParts} />
+        </div>
       </div>
-      <MinifigSummary minifigParts={minifigParts} />
-    </div>
+    </FormProvider>
   );
 };
 
