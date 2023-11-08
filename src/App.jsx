@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import WelcomePage from "./views/WelcomePage";
 import SummaryPage from "./views/SummaryPage";
-import MinifigsPage from "./Views/MinifigsPage";
+import MinifigsPage from "./views/MinifigsPage";
 import ChoosedMinifigProvider from "./context/ChoosedMinifigProvider";
 
 function App() {
