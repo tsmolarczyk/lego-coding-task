@@ -35,11 +35,11 @@ const SummaryPage = () => {
 
   return (
     <FormProvider>
-      <div className="flex flex-col md:flex-row bg-lego-pattern bg-cover min-h-screen w-full">
+      <div className="flex flex-col md:flex-row bg-lego-pattern bg-cover bg-center bg-no-repeat min-h-screen w-full justify-center items-center h-auto pb-4">
         <div className="md:flex-grow">
           <Form />
         </div>
-        <div className="md:flex-none md:w-1/3 xl:w-1/4 p-4 mx-auto mr-12">
+        <div className="md:flex-none md:w-1/3 xl:w-1/4 p-4 mx-auto">
           <MinifigSummary minifigParts={minifigParts} />
         </div>
       </div>
