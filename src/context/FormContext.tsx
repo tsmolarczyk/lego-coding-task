@@ -19,8 +19,8 @@ type FormData = {
 };
 
 type FormContextType = {
-  onSubmit: (data: FormData) => void;
-  setOnSubmit: React.Dispatch<React.SetStateAction<(data: FormData) => void>>;
+  onSubmit: (data?: FormData) => void;
+  setOnSubmit: React.Dispatch<React.SetStateAction<(data?: FormData) => void>>;
   isValid: boolean;
 };
 
@@ -39,7 +39,7 @@ interface FormProviderProps {
 }
 
 export const FormProvider: FC<FormProviderProps> = ({ children }) => {
-  const [onSubmit, setOnSubmit] = useState<(data: FormData) => void>(() => {});
+  const [onSubmit, setOnSubmit] = useState<(data?: FormData) => void>(() => {});
   const [isValid, setIsValid] = useState<boolean>(false);
 
   return (

@@ -7,9 +7,11 @@ import { FormProvider } from "../context/FormContext";
 const API_KEY = "key 75b805e57df61a1d8d61104835211b31";
 
 interface Part {
-  part_num: string;
-  name: string;
-  part_img_url: string;
+  part: {
+    part_img_url: string;
+    name: string;
+    part_num: string;
+  };
 }
 
 interface PartsApiResponse {
@@ -22,6 +24,9 @@ interface PartsApiResponse {
 const SummaryPage = () => {
   const { choosedMinifig } = useChoosedMinifig();
   const [minifigParts, setMinifigParts] = useState<PartsApiResponse>({
+    count: 0,
+    next: null,
+    previous: null,
     results: []
   });
 
@@ -52,7 +57,7 @@ const SummaryPage = () => {
           <Form />
         </div>
         <div className="md:flex-none md:w-1/3 xl:w-1/4 p-4 mx-auto">
-          <MinifigSummary minifigParts={minifigParts} />
+          <MinifigSummary minifigParts={{ results: minifigParts.results }} />
         </div>
       </div>
     </FormProvider>

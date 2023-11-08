@@ -11,6 +11,8 @@ interface Minifig {
   set_img_url: string;
   name: string;
   set_url: string;
+  num_parts: number;
+  last_modified_dt: string;
 }
 
 const MinifigsPage: FC = () => {
