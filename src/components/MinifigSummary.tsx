@@ -25,7 +25,6 @@ const MinifigSummary: React.FC<MinifigSummaryProps> = ({ minifigParts }) => {
   if (!choosedMinifig) {
     return <div>Choose your Lego Figure</div>
   }
-  console.log('isValid form minifigSummary', isValid)
   return (
     <div className="bg-white text-black text-center flex flex-col justify-between p-6 my-6 mx-auto rounded-lg shadow-md  md:max-w-screen-md w-full min-w-[260px] h-full md:mr-4 lg:mr-8 xl:mr-12">
       <div className=" font-bold">

@@ -101,7 +101,6 @@ const MinifigsPage: FC = () => {
       </div>
     )
   }
-  console.log(minifigs)
   return (
     <div className="flex flex-wrap flex-col justify-center gap-4 p-4 bg-lego-pattern bg-cover min-h-screen">
       <h1 className=" text-4xl font-bold text-white m-4 mb-12 text-center">
