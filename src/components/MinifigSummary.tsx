@@ -1,12 +1,32 @@
+import React from "react";
 import useChoosedMinifig from "../context/useChoosedMinifig";
-import Button from "../components/Button";
+import Button from "./Button";
 import { useFormContext } from "../context/FormContext";
 
-const MinifigSummary = ({ minifigParts }) => {
+interface Part {
+  part: {
+    part_img_url: string;
+    name: string;
+    part_num: string;
+  };
+}
+
+interface MinifigSummaryProps {
+  minifigParts: {
+    results: Part[];
+  };
+}
+
+const MinifigSummary: React.FC<MinifigSummaryProps> = ({ minifigParts }) => {
   const { choosedMinifig } = useChoosedMinifig();
   const { onSubmit, isValid } = useFormContext();
+
+  if (!choosedMinifig) {
+    return <div>Choose your Lego Figure</div>;
+  }
+
   return (
-    <div className="bg-white text-black text-center flex flex-col justify-between p-6 my-6 mx-auto rounded-lg shadow-md max-w-full md:max-w-screen-md w-full min-w-[260px] h-full md:mr-4 lg:mr-8 xl:mr-12">
+    <div className="bg-white text-black text-center flex flex-col justify-between p-6 my-6 mx-auto rounded-lg shadow-md  md:max-w-screen-md w-full min-w-[260px] h-full md:mr-4 lg:mr-8 xl:mr-12">
       <div className=" font-bold">
         <h1 className="text-2xl text-left mb-4 ">SUMMARY</h1>
         <div className="font-sans">
@@ -37,7 +57,11 @@ const MinifigSummary = ({ minifigParts }) => {
         </div>
       </div>
       <div className="pb-6">
-        <Button title={"SUMBIT"} onClick={onSubmit} disabled={!isValid} />
+        <Button
+          title={"SUBMIT"}
+          onClick={() => onSubmit()}
+          isDisabled={!isValid}
+        />
       </div>
     </div>
   );

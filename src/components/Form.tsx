@@ -1,9 +1,21 @@
-import { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useFormContext } from "../context/FormContext";
 import { useNavigate } from "react-router-dom";
+
+type FormData = {
+  name: string;
+  surname: string;
+  phoneNumber: string;
+  email: string;
+  dateOfBirth: Date | null;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+};
 
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
@@ -43,13 +55,13 @@ const Form = () => {
     register,
     handleSubmit,
     formState: { errors, isValid }
-  } = useForm({
+  } = useForm<FormData>({
     mode: "all",
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema) as any
   });
 
   const onSubmit = useCallback(
-    async data => {
+    async (data: FormData) => {
       try {
         const response = await fetch(
           "https://jsonplaceholder.typicode.com/posts",

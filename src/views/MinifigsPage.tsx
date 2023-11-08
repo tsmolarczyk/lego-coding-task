@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, FC } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import MinifigCard from "../components/MinifigCard";
@@ -6,13 +6,22 @@ import useChoosedMinifig from "../context/useChoosedMinifig";
 import Lottie from "lottie-react";
 import legoAnimation from "../assets/lottie-lego.json";
 
-const MinifigsPage = () => {
+interface Minifig {
+  set_num: string;
+  set_img_url: string;
+  name: string;
+  set_url: string;
+  num_parts: number;
+  last_modified_dt: string;
+}
+
+const MinifigsPage: FC = () => {
   const API_KEY = "key 75b805e57df61a1d8d61104835211b31";
   const HARRY_POTTER_THEME_ID = 246;
   const perPage = 100;
   const navigate = useNavigate();
-  const [minifigs, setMinifigs] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [minifigs, setMinifigs] = useState<Minifig[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const { choosedMinifig, setChoosedMinifig } = useChoosedMinifig();
 
   useEffect(() => {
@@ -41,12 +50,12 @@ const MinifigsPage = () => {
     return data.count;
   };
 
-  const getRandomPageNumber = totalCount => {
+  const getRandomPageNumber = (totalCount: number): number => {
     const totalPages = Math.ceil(totalCount / perPage);
     return Math.floor(Math.random() * totalPages) + 1;
   };
 
-  const getRandomMinifigs = async count => {
+  const getRandomMinifigs = async (count: number) => {
     localStorage.clear();
 
     const randomMinifigs = [];
@@ -77,9 +86,10 @@ const MinifigsPage = () => {
     navigate("/summary");
   };
 
-  const handleActive = minifig => {
+  const handleActive = (minifig: Minifig) => {
     setChoosedMinifig(minifig);
   };
+
   if (loading) {
     return (
       <div className="flex flex-wrap justify-center gap-4 p-4 bg-lego-pattern bg-cover min-h-screen">

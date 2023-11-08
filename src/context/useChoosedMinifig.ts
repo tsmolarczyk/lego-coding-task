@@ -1,7 +1,9 @@
 import { useContext } from "react";
-import ChoosedMinifigContext from "./ChoosedMinifigContext";
+import ChoosedMinifigContext, {
+  ChoosedMinifigContextType
+} from "./ChoosedMinifigContext";
 
-const useChoosedMinifig = () => {
+const useChoosedMinifig = (): ChoosedMinifigContextType => {
   const context = useContext(ChoosedMinifigContext);
   if (!context) {
     throw new Error(
