@@ -17,7 +17,7 @@ interface Minifig {
 }
 
 const MinifigsPage: FC = () => {
-  const API_KEY = 'key 75b805e57df61a1d8d61104835211b31'
+  const API_KEY = import.meta.env.VITE_API_KEY
   const HARRY_POTTER_THEME_ID = 246
   const perPage = 100
   const navigate = useNavigate()
@@ -104,6 +104,9 @@ const MinifigsPage: FC = () => {
   console.log(minifigs)
   return (
     <div className="flex flex-wrap flex-col justify-center gap-4 p-4 bg-lego-pattern bg-cover min-h-screen">
+      <h1 className=" text-4xl font-bold text-white m-4 mb-12 text-center">
+        CHOOSE YOUR MINIFIG
+      </h1>
       <div className="flex justify-center items-center flex-col lg:flex-row ">
         {minifigs.map((minifig) => (
           <MinifigCard

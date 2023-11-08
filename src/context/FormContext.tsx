@@ -22,6 +22,7 @@ type FormContextType = {
   onSubmit: (data?: FormData) => void
   setOnSubmit: React.Dispatch<React.SetStateAction<(data?: FormData) => void>>
   isValid: boolean
+  setIsValid: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const FormContext = createContext<FormContextType | undefined>(undefined)
@@ -43,7 +44,9 @@ export const FormProvider: FC<FormProviderProps> = ({ children }) => {
   const [isValid, setIsValid] = useState<boolean>(false)
 
   return (
-    <FormContext.Provider value={{ onSubmit, setOnSubmit, isValid }}>
+    <FormContext.Provider
+      value={{ onSubmit, setOnSubmit, isValid, setIsValid }}
+    >
       {children}
     </FormContext.Provider>
   )

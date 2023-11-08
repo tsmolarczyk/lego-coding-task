@@ -5,7 +5,7 @@ import useChoosedMinifig from '../context/useChoosedMinifig'
 import MinifigSummary from '../components/MinifigSummary'
 import { FormProvider } from '../context/FormContext'
 
-const API_KEY = 'key 75b805e57df61a1d8d61104835211b31'
+const API_KEY = import.meta.env.VITE_API_KEY
 
 interface Part {
   part: {
@@ -54,7 +54,7 @@ const SummaryPage = () => {
   return (
     <FormProvider>
       <div className="flex flex-col md:flex-row bg-lego-pattern bg-cover bg-center bg-no-repeat min-h-screen w-full justify-center items-center h-auto pb-4">
-        <div className="md:flex-grow">
+        <div className="md:w-2/3 p4">
           <Form />
         </div>
         <div className="md:flex-none md:w-1/3 xl:w-1/4 p-4 mx-auto">

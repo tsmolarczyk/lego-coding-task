@@ -46,7 +46,7 @@ const schema = yup.object().shape({
 })
 
 const Form = () => {
-  const { setOnSubmit } = useFormContext()
+  const { setOnSubmit, setIsValid } = useFormContext()
   const navigate = useNavigate()
 
   const {
@@ -84,6 +84,7 @@ const Form = () => {
 
   useEffect(() => {
     setOnSubmit(() => handleSubmit(onSubmit))
+    setIsValid(isValid)
   }, [setOnSubmit, handleSubmit, onSubmit, isValid])
 
   return (
