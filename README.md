@@ -10,7 +10,6 @@ This is a recruitment project that allows the drawing of three different minifig
 - **React Hook Form**: Used for handling forms in the application.
 - **Tailwind CSS**: Used for styling the application’s components.
 - **Lottie**: Used for displaying loading animations.
-- LocalStorage: Used for storing user data in the browser to prevent data loss during refresh.
 
 ## Description
 The project unfolds across three views: 'Welcome,' 'Choose Minifig,' and 'Summary.' It presents three random Harry Potter minifigures for the user's selection. Once a choice is made, the user advances to the 'Summary' view, which features a form. Upon accurate completion of this form, users can confirm their order. Adjacent to the form is a concise summary and details of the selected minifigure. Finally, user details are transmitted to fake API.
