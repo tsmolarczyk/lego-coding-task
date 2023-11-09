@@ -87,151 +87,160 @@ const Form = () => {
   }, [setOnSubmit, handleSubmit, onSubmit, isValid])
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="font-sans space-y-4 p-20"
-    >
-      <div className="flex space-x-4">
-        <div className="flex-1">
+    <>
+      <h1 className="text-2xl pl-20 mb-12 font-bold text-white ">
+        SHIPPING DETAILS{' '}
+      </h1>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="font-sans space-y-4 px-20 pb-20"
+      >
+        <div className="flex space-x-4">
+          <div className="flex-1">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Name
+            </label>
+            <input
+              {...register('name')}
+              id="name"
+              className="p-2 border border-gray-300 rounded shadow-sm w-full"
+            />
+            <p className="text-red-500 text-xs mt-1">{errors.name?.message}</p>
+          </div>
+          <div className="flex-1">
+            <label
+              htmlFor="surname"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Surname
+            </label>
+            <input
+              {...register('surname')}
+              id="surname"
+              className="p-2 border border-gray-300 rounded shadow-sm w-full"
+            />
+            <p className="text-red-500 text-xs mt-1">
+              {errors.surname?.message}
+            </p>
+          </div>
+        </div>
+        <div>
           <label
-            htmlFor="name"
+            htmlFor="phoneNumber"
             className="block text-sm font-medium text-gray-300"
           >
-            Name
+            Phone Number
           </label>
           <input
-            {...register('name')}
-            id="name"
+            {...register('phoneNumber')}
+            id="phoneNumber"
             className="p-2 border border-gray-300 rounded shadow-sm w-full"
           />
-          <p className="text-red-500 text-xs mt-1">{errors.name?.message}</p>
+          <p className="text-red-500 text-xs mt-1">
+            {errors.phoneNumber?.message}
+          </p>
         </div>
-        <div className="flex-1">
+
+        <div>
           <label
-            htmlFor="surname"
+            htmlFor="email"
             className="block text-sm font-medium text-gray-300"
           >
-            Surname
+            Email
           </label>
           <input
-            {...register('surname')}
-            id="surname"
+            {...register('email')}
+            id="email"
             className="p-2 border border-gray-300 rounded shadow-sm w-full"
           />
-          <p className="text-red-500 text-xs mt-1">{errors.surname?.message}</p>
+          <p className="text-red-500 text-xs mt-1">{errors.email?.message}</p>
         </div>
-      </div>
-      <div>
-        <label
-          htmlFor="phoneNumber"
-          className="block text-sm font-medium text-gray-300"
-        >
-          Phone Number
-        </label>
-        <input
-          {...register('phoneNumber')}
-          id="phoneNumber"
-          className="p-2 border border-gray-300 rounded shadow-sm w-full"
-        />
-        <p className="text-red-500 text-xs mt-1">
-          {errors.phoneNumber?.message}
-        </p>
-      </div>
 
-      <div>
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium text-gray-300"
-        >
-          Email
-        </label>
-        <input
-          {...register('email')}
-          id="email"
-          className="p-2 border border-gray-300 rounded shadow-sm w-full"
-        />
-        <p className="text-red-500 text-xs mt-1">{errors.email?.message}</p>
-      </div>
-
-      <div>
-        <label
-          htmlFor="dateOfBirth"
-          className="block text-sm font-medium text-gray-300"
-        >
-          Date of Birth
-        </label>
-        <input
-          type="date"
-          {...register('dateOfBirth')}
-          id="dateOfBirth"
-          className="p-2 border border-gray-300 rounded shadow-sm w-full"
-        />
-        <p className="text-red-500 text-xs mt-1">
-          {errors.dateOfBirth?.message}
-        </p>
-      </div>
-
-      <div>
-        <label
-          htmlFor="address"
-          className="block text-sm font-medium text-gray-300"
-        >
-          Address
-        </label>
-        <input
-          {...register('address')}
-          id="address"
-          className="p-2 border border-gray-300 rounded shadow-sm w-full"
-        />
-        <p className="text-red-500 text-xs mt-1">{errors.address?.message}</p>
-      </div>
-
-      <div>
-        <label
-          htmlFor="city"
-          className="block text-sm font-medium text-gray-300"
-        >
-          City
-        </label>
-        <input
-          {...register('city')}
-          id="city"
-          className="p-2 border border-gray-300 rounded shadow-sm w-full"
-        />
-        <p className="text-red-500 text-xs mt-1">{errors.city?.message}</p>
-      </div>
-
-      <div className="flex space-x-4">
-        <div className="flex-1">
+        <div>
           <label
-            htmlFor="state"
+            htmlFor="dateOfBirth"
             className="block text-sm font-medium text-gray-300"
           >
-            State
+            Date of Birth
           </label>
           <input
-            {...register('state')}
-            id="state"
+            type="date"
+            {...register('dateOfBirth')}
+            id="dateOfBirth"
             className="p-2 border border-gray-300 rounded shadow-sm w-full"
           />
-          <p className="text-red-500 text-xs mt-1">{errors.state?.message}</p>
+          <p className="text-red-500 text-xs mt-1">
+            {errors.dateOfBirth?.message}
+          </p>
         </div>
-        <div className="flex-1">
+
+        <div>
           <label
-            htmlFor="zipCode"
+            htmlFor="address"
             className="block text-sm font-medium text-gray-300"
           >
-            Zip Code
+            Address
           </label>
           <input
-            {...register('zipCode')}
-            id="zipCode"
+            {...register('address')}
+            id="address"
             className="p-2 border border-gray-300 rounded shadow-sm w-full"
           />
-          <p className="text-red-500 text-xs mt-1">{errors.zipCode?.message}</p>
+          <p className="text-red-500 text-xs mt-1">{errors.address?.message}</p>
         </div>
-      </div>
-    </form>
+
+        <div>
+          <label
+            htmlFor="city"
+            className="block text-sm font-medium text-gray-300"
+          >
+            City
+          </label>
+          <input
+            {...register('city')}
+            id="city"
+            className="p-2 border border-gray-300 rounded shadow-sm w-full"
+          />
+          <p className="text-red-500 text-xs mt-1">{errors.city?.message}</p>
+        </div>
+
+        <div className="flex space-x-4">
+          <div className="flex-1">
+            <label
+              htmlFor="state"
+              className="block text-sm font-medium text-gray-300"
+            >
+              State
+            </label>
+            <input
+              {...register('state')}
+              id="state"
+              className="p-2 border border-gray-300 rounded shadow-sm w-full"
+            />
+            <p className="text-red-500 text-xs mt-1">{errors.state?.message}</p>
+          </div>
+          <div className="flex-1">
+            <label
+              htmlFor="zipCode"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Zip Code
+            </label>
+            <input
+              {...register('zipCode')}
+              id="zipCode"
+              className="p-2 border border-gray-300 rounded shadow-sm w-full"
+            />
+            <p className="text-red-500 text-xs mt-1">
+              {errors.zipCode?.message}
+            </p>
+          </div>
+        </div>
+      </form>
+    </>
   )
 }
 
