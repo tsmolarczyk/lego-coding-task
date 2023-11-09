@@ -3,17 +3,21 @@
 ## Description
 This is a recruitment project that allows the drawing of three different minifigs using the Rebrickable API.
 
-## Technologies and tools
-- React: The main library used for building the user interface.
-- Redux: Used for managing the state of the application, including the state of the minifigs and the form.
-- React Hook Form: Used for handling forms in the application.
-- Tailwind CSS: Used for styling the application’s components.
-- Lottie: Used for displaying loading animations.
+## Technologies and libraries
+- **React**: The main library used for building the user interface.
+- **Context**: Used for managing the state of the application, including the state of the minifigs and the form.
+- **React Router**: Used for handling page routing.
+- **React Hook Form**: Used for handling forms in the application.
+- **Tailwind CSS**: Used for styling the application’s components.
+- **Lottie**: Used for displaying loading animations.
 - LocalStorage: Used for storing user data in the browser to prevent data loss during refresh.
 
-## Features
+## Description
+The project unfolds across three views: 'Welcome,' 'Choose Minifig,' and 'Summary.' It presents three random Harry Potter minifigures for the user's selection. Once a choice is made, the user advances to the 'Summary' view, which features a form. Upon accurate completion of this form, users can confirm their order. Adjacent to the form is a concise summary and details of the selected minifigure. Finally, user details are transmitted to fake API.
+
 - Minifig Drawing: Users can draw three different minifigs. The drawing is initiated by pressing a button on the main page.
 - Minifig Selection: Users must select one of the three drawn minifigs before proceeding to the next step.
+- Minifig Saved: Choosed minifig is saved in **LocalStorage** to prevent data loss.
 - Minifig Details: Users can view additional information about the selected minifig.
 - Shipping Form: Users must fill out a shipping form before submitting the order. Each field in the form is validated.
 - Order Summary: Before submitting the order, users can view a summary of their order, with detailed parts.
